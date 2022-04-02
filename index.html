@@ -30,7 +30,7 @@
       });
       $(".res").hide();
       $("#solve").click(function(){
-      var exp  = $("#eq").val();
+      var exp  = ($("#eq").val()).toLowerCase();
       var op  = $(".op input:checked").val();
       if(exp){
         var html = '';

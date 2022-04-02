@@ -23,6 +23,9 @@
           $("#solve").click();
         }
       });
+     $("#eq").keyup(function(){
+        $("#solve").click();
+      });
       $(".op").change(function(){
         $(".op").find("label").css("color","black");
         $(this).find("label").css("color","green");
@@ -97,12 +100,12 @@
         <input type="radio" class="form-check-input" id="radio3" name="optradio" value="simplify">
         <label class="form-check-label" for="radio3">simplify</label>
       </div>
-
-    <div class="col-2"><br>
-      <div id="solve" class="btn btn-outline-success">Solve</div>
+    </div>
+    <div class="col"><br>
+      <div id="solve" class="btn btn-outline-success d-block">Solve</div>
     </div>
 
-    </div>
+    
   </div>
   
   <div class="res alert alert-info mt-3"></div>

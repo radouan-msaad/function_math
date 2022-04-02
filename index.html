@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Function</title>
+  <!-- <link rel="stylesheet" href="styles/bootstrap-5.1.3/css/bootstrap.min.css">
+  <script src="bib/math/math.min.js"></script>
+  <script src="styles/jquery.js"></script>
+   -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.4.2/math.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <style type="text/css">
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(window).keyup(function(e){
+        var x = e.which||e.keyCode;
+        if(x==13){
+          $("#solve").click();
+        }
+      });
+      $(".op").change(function(){
+        $(".op").find("label").css("color","black");
+        $(this).find("label").css("color","green");
+        $("#solve").click();
+      });
+      $(".res").hide();
+      $("#solve").click(function(){
+      var exp  = $("#eq").val();
+      var op  = $(".op input:checked").val();
+      if(exp){
+        var html = '';
+      try{
+      html = 'Sollution '+exp+' : <br>';
+
+      if(op == 'derivative'){
+      var res1  = math.derivative(exp,'x',{simplify:false}).toString();
+      html += "="+res1+'<br>';
+      var res2  = math.derivative(exp,'x').toString();
+       html += "="+res2+'<br>';
+     }else if(op == 'rationalize'){
+      try{
+         var res1  = math.rationalize(exp);
+         html += "="+res1+'<br>';
+      }catch(e){
+         html += exp;
+      }
+     }
+     else if(op == 'simplify'){
+      try{
+         var res1  = math.simplify(exp);
+         html += "="+res1+'<br>';
+      }catch(e){
+         html += exp;
+      }
+     }
+     }catch(e){
+     html += e.message;
+     }
+      $(".res").html(html);
+      $(".res").show();
+      }
+      });
+      
+    });
+  </script>
+</head>
+<body>
+    
+<div class="container mt-3 col-11 col-sm-10 col-md-8 col-lg-6 border border-2 border-info shadow p-4 mt-5">
+  <form action="" class="was-validated">
+<div class="form-group">
+  <div class="row">
+
+     <div class="col">
+      <label for="eq">Function:</label>
+      <input type="text" id="eq" class="form-control mt-2" autofocus >
+      <input type="text" class="d-none">
+     </div>
+  </div>
+  <div class="row">
+      <div class="col form-check op ms-2 mt-4">
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="derivative" checked>
+        <label class="form-check-label" for="radio1">derivative</label>
+      </div>
+
+      <div class="col form-check op mt-4">
+        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="rationalize">
+        <label class="form-check-label" for="radio2">rationalize</label>
+      </div>
+
+      <div class="col form-check op mt-4">
+        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="simplify">
+        <label class="form-check-label" for="radio3">simplify</label>
+      </div>
+
+    <div class="col-2"><br>
+      <div id="solve" class="btn btn-outline-success">Solve</div>
+    </div>
+
+    </div>
+  </div>
+  
+  <div class="res alert alert-info mt-3"></div>
+  </div>
+</form>
+</div>
+</body>
+</html> 
